@@ -15,7 +15,7 @@ void solve(){
 		adjone[v].push_back(u);
 	}
 	long long total = n*1LL*(n-1)/2;
-	long long zpaths = total - m;
+	long long zpaths = total - m; 
 }
 
 int main(){
