@@ -15,12 +15,12 @@ class SuffixDecomposition{
 			long long A[N];
 			A[0] = A0;
 			for(int i =1;i<N;i++)
-				A[i] = (A[i-1]*X%modi)*Y%modi;
+				A[i] = (A[i-1]*X +Y)%modi;
 
 			long long  B[N];
 			B[0] = B0;
 			for(int i =1;i<N;i++)
-				B[i] = (B[i-1]*X1%modi)*Y1%modi;
+				B[i] = (B[i-1]*X1%modi + Y1)%modi;
 
 			vector<int>S = P;
 			for(int i =P.size();i<N;i++){
@@ -39,7 +39,7 @@ class SuffixDecomposition{
 				}
 				else{
 					int pos = -1;
-					while(!nextbig.empty()&&nextbig.top().first<S[i]){
+					while(!nextbig.empty()&&nextbig.top().first<=S[i]){
 						nextbig.pop();
 					}
 					if(nextbig.empty()){
@@ -48,14 +48,15 @@ class SuffixDecomposition{
 					else{
 						pos = nextbig.top().second;
 						add_mod(dp[i+1],dp[pos]+1);
+
 					}
 
 					nextbig.push(make_pair(S[i],i+1));
 				}
 			}
 			long long ans = 0;
-			for(int i =0;i<N;i++){
-				ans+=dp[i+1];
+			for(int i=N;i>0;i--){
+				ans+=dp[i];
 			}
 			return ans;
 		}
